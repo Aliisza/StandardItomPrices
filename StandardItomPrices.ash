@@ -42,11 +42,28 @@ string pretty_prices(float x) {
 		: x.to_int().to_string('%d');
 }
 
+int clean_int(string s)
+{
+	return replace_string(s, ",", "").to_string().to_int();
+}
+
+int get_lowest_price(item i)
+{
+	string s = cli_execute_output("searchmall " + i.to_string());
+
+	matcher m = create_matcher("([0-9,]+) @ ([0-9, ]+) meat", s);
+	if (find(m)) { # NOTE: You could while loop and get all listings
+		# m.group(1) is count, m.group(2) is price
+		return(clean_int(m.group(2)));
+	}
+	return 0;
+}
+
 void main() {
 
 float[item] rates;
 	foreach it,x in derivatives {
-		rates[x] = x.mall_price();
+		rates[x] = x.get_lowest_price();
 	}
 	sort derivatives by rates[value];
 	foreach i,it in derivatives
