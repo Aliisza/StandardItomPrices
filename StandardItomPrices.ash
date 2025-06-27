@@ -49,7 +49,6 @@ float[item] rates;
 		rates[x] = x.mall_price();
 	}
 	sort derivatives by rates[value];
-	//print(`inflammable leaf derivatives are selling at {lorate}~{hirate} meat per leaf`);
 	foreach i,it in derivatives
 	print(`{it} price = {it.mall_price().pretty_prices()}`);		
 }
