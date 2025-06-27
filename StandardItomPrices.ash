@@ -67,5 +67,5 @@ float[item] rates;
 	}
 	sort derivatives by rates[value];
 	foreach i,it in derivatives
-	print(`{it} price = {it.mall_price().pretty_prices()}`);		
+	print(`{it} price = {rates[it].pretty_prices()}`);		
 }
